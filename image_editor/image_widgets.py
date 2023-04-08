@@ -1,4 +1,6 @@
 import customtkinter as ctk
+from tkinter import Canvas, filedialog
+from settings import *
 
 
 class ImageImport(ctk.CTkFrame):
@@ -11,5 +13,17 @@ class ImageImport(ctk.CTkFrame):
         )
 
     def open_dialog(self):
-        path = "test"
+        path = filedialog.askopenfilename()
         self.import_func(path)
+
+
+class ImageOutput(Canvas):
+    def __init__(self, parent):
+        super().__init__(
+            master=parent,
+            background=BACKGROUND_COLOR,
+            bd=0,
+            highlightthickness=0,
+            relief="ridge",
+        )
+        self.grid(row=0, column=1, sticky="nsew")

@@ -28,6 +28,8 @@ class Calculator(ctk.CTk):
         # data
         self.result_string = ctk.StringVar(value="0")
         self.formula_string = ctk.StringVar(value="")
+        self.display_nums = []
+        self.full_operation = []
 
         # widgets
         self.create_widgets()
@@ -113,10 +115,39 @@ class Calculator(ctk.CTk):
                 )
 
     def num_press(self, value):
-        print(value)
+        self.display_nums.append(str(value))
+        full_number = "".join(self.display_nums)
+        self.result_string.set(full_number)
 
     def math_press(self, value):
-        print(value)
+        current_number = "".join(self.display_nums)
+        if current_number:
+            self.full_operation.append(current_number)
+            if value != "=":
+                # update data
+                self.full_operation.append(value)
+                self.display_nums.clear()
+                # update output
+                self.result_string.set("")
+                self.formula_string.set(" ".join(self.full_operation))
+            else:
+                formula = " ".join(self.full_operation)
+                result = eval(formula)
+
+                # format results
+                if isinstance(result, float):
+                    if result.is_integer():
+                        result = int(result)
+                    else:
+                        result = round(result, 8)
+                # update data
+                self.full_operation.clear()
+                self.display_nums = [str(result)]
+                # update output
+                self.result_string.set(result)
+                self.formula_string.set(formula)
+                # clear full operation list
+                # display_nums should have value of result
 
     def clear(self):
         print("clear")

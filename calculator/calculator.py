@@ -1,11 +1,13 @@
 import customtkinter as ctk
 import darkdetect
+from PIL import Image
+from buttons import Button, ImageButton
 from settings import *
 
-try:
-    from ctypes import windll, byref, sizeof, c_int
-except:
-    pass
+# try:
+#     from ctypes import windll, byref, sizeof, c_int
+# except:
+#     pass
 
 
 class Calculator(ctk.CTk):
@@ -41,20 +43,60 @@ class Calculator(ctk.CTk):
         OutputLabel(self, 0, "se", main_font, self.formula_string)
         OutputLabel(self, 1, "e", results_font, self.result_string)
 
-    def title_bar_color(self, is_dark):
-        try:
-            HWND = windll.user32.GetParent(self.winfo_id())
-            DWMWA_ATTRIBUTE = 35
-            COLOR = (
-                TITLE_BAR_HEX_COLORS["dark"]
-                if is_dark
-                else TITLE_BAR_HEX_COLORS["light"]
-            )
-            windll.dwmapi.DwmSetWindowAttribute(
-                HWND, DWMWA_ATTRIBUTE, byref(c_int(COLOR)), sizeof(c_int)
-            )
-        except:
-            pass
+        # clear (AC) button
+        Button(
+            parent=self,
+            func=self.clear,
+            text=OPERATORS["clear"]["text"],
+            column=OPERATORS["clear"]["col"],
+            row=OPERATORS["clear"]["row"],
+            font=main_font,
+        )
+
+        # % button
+        Button(
+            parent=self,
+            func=self.percent,
+            text=OPERATORS["percent"]["text"],
+            column=OPERATORS["percent"]["col"],
+            row=OPERATORS["percent"]["row"],
+            font=main_font,
+        )
+
+        # +/- button
+        # invert_image = ctk.CTkImage(light_image="", dark_image="")
+        Button(
+            parent=self,
+            func=self.invert,
+            text="+/-",
+            column=OPERATORS["invert"]["col"],
+            row=OPERATORS["invert"]["row"],
+            font=main_font,
+        )
+
+    def clear(self):
+        print("clear")
+
+    def percent(self):
+        print("percent")
+
+    def invert(self):
+        print("invert")
+
+    # def title_bar_color(self, is_dark):
+    #     try:
+    #         HWND = windll.user32.GetParent(self.winfo_id())
+    #         DWMWA_ATTRIBUTE = 35
+    #         COLOR = (
+    #             TITLE_BAR_HEX_COLORS["dark"]
+    #             if is_dark
+    #             else TITLE_BAR_HEX_COLORS["light"]
+    #         )
+    #         windll.dwmapi.DwmSetWindowAttribute(
+    #             HWND, DWMWA_ATTRIBUTE, byref(c_int(COLOR)), sizeof(c_int)
+    #         )
+    #     except:
+    #         pass
 
 
 class OutputLabel(ctk.CTkLabel):

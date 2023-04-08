@@ -12,7 +12,7 @@ STYLING = {"gap": 0.5, "corner-radius": 0}
 
 NUM_POSITIONS = {
     ".": {"col": 2, "row": 6, "span": 1},
-    "0": {"col": 0, "row": 6, "span": 1},
+    "0": {"col": 0, "row": 6, "span": 2},
     "1": {"col": 0, "row": 5, "span": 1},
     "2": {"col": 1, "row": 5, "span": 1},
     "3": {"col": 2, "row": 5, "span": 1},
@@ -25,11 +25,21 @@ NUM_POSITIONS = {
 }
 
 MATH_POSITIONS = {
-    "/": {"col": 3, "row": 2, "character": "", "operator": "/", "image_path": None},
-    "*": {"col": 3, "row": 3, "character": "x", "operator": "*", "image_path": None},
-    "-": {"col": 3, "row": 4, "character": "-", "operator": "-", "image_path": None},
-    "=": {"col": 3, "row": 6, "character": "=", "operator": "=", "image_path": None},
-    "+": {"col": 3, "row": 5, "character": "+", "operator": "+", "image_path": None},
+    "/": {
+        "col": 3,
+        "row": 2,
+        "character": "\u00F7",
+        "operator": "/",
+        "image_path": None,
+        # "image_path": {
+        #     "light": "images/invert_light.png",
+        #     "dark": "images/invert_dark.png",
+        # },
+    },
+    "*": {"col": 3, "row": 3, "character": "x", "image_path": None},
+    "-": {"col": 3, "row": 4, "character": "-", "image_path": None},
+    "=": {"col": 3, "row": 6, "character": "=", "image_path": None},
+    "+": {"col": 3, "row": 5, "character": "+", "image_path": None},
 }
 
 OPERATORS = {

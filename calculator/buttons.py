@@ -38,6 +38,19 @@ class NumButton(Button):
         )
 
 
+class MathButton(Button):
+    def __init__(self, parent, text, operator, func, col, row, font, color="orange"):
+        super().__init__(
+            parent=parent,
+            text=text,
+            func=lambda: func(operator),
+            col=col,
+            row=row,
+            font=font,
+            color=color,
+        )
+
+
 class ImageButton(CTkButton):
     def __init__(self, parent, func, text, column, row, image, color="dark-gray"):
         super().__init__(
@@ -56,4 +69,16 @@ class ImageButton(CTkButton):
             sticky="nsew",
             padx=STYLING["gap"],
             pady=STYLING["gap"],
+        )
+
+
+class MathImageButton(ImageButton):
+    def __init__(self, parent, operator, func, col, row, image, color="orange"):
+        super().__init__(
+            parent=parent,
+            func=lambda: func(operator),
+            col=col,
+            row=row,
+            image=image,
+            color=color,
         )

@@ -150,13 +150,27 @@ class Calculator(ctk.CTk):
                 # display_nums should have value of result
 
     def clear(self):
-        print("clear")
+        self.result_string.set(0)
+        self.formula_string.set("")
+        self.display_nums.clear()
+        self.full_operation.clear()
 
     def percent(self):
-        print("percent")
+        if self.display_nums:
+            current_number = float("".join(self.display_nums))
+            percent_number = current_number / 100
+            self.display_nums = list(str(percent_number))
+            self.result_string.set("".join(self.display_nums))
 
     def invert(self):
-        print("invert")
+        current_number = "".join(self.display_nums)
+        if current_number:
+            if float(current_number) > 0:
+                self.display_nums.insert(0, "-")
+            else:
+                del self.display_nums[0]
+
+            self.result_string.set("".join(self.display_nums))
 
     def title_bar_color(self, is_dark):
         try:

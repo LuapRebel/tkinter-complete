@@ -1,13 +1,13 @@
 import customtkinter as ctk
 import darkdetect
 from PIL import Image
-from buttons import Button, ImageButton
+from buttons import Button, ImageButton, NumButton
 from settings import *
 
-# try:
-#     from ctypes import windll, byref, sizeof, c_int
-# except:
-#     pass
+try:
+    from ctypes import windll, byref, sizeof, c_int
+except:
+    pass
 
 
 class Calculator(ctk.CTk):
@@ -48,7 +48,7 @@ class Calculator(ctk.CTk):
             parent=self,
             func=self.clear,
             text=OPERATORS["clear"]["text"],
-            column=OPERATORS["clear"]["col"],
+            col=OPERATORS["clear"]["col"],
             row=OPERATORS["clear"]["row"],
             font=main_font,
         )
@@ -58,7 +58,7 @@ class Calculator(ctk.CTk):
             parent=self,
             func=self.percent,
             text=OPERATORS["percent"]["text"],
-            column=OPERATORS["percent"]["col"],
+            col=OPERATORS["percent"]["col"],
             row=OPERATORS["percent"]["row"],
             font=main_font,
         )
@@ -69,10 +69,25 @@ class Calculator(ctk.CTk):
             parent=self,
             func=self.invert,
             text="+/-",
-            column=OPERATORS["invert"]["col"],
+            col=OPERATORS["invert"]["col"],
             row=OPERATORS["invert"]["row"],
             font=main_font,
         )
+
+        # number buttons
+        for num, data in NUM_POSITIONS.items():
+            NumButton(
+                parent=self,
+                text=num,
+                func=self.num_press,
+                col=data["col"],
+                row=data["row"],
+                font=main_font,
+                span=data["span"],
+            )
+
+    def num_press(self, value):
+        print(value)
 
     def clear(self):
         print("clear")
@@ -83,20 +98,20 @@ class Calculator(ctk.CTk):
     def invert(self):
         print("invert")
 
-    # def title_bar_color(self, is_dark):
-    #     try:
-    #         HWND = windll.user32.GetParent(self.winfo_id())
-    #         DWMWA_ATTRIBUTE = 35
-    #         COLOR = (
-    #             TITLE_BAR_HEX_COLORS["dark"]
-    #             if is_dark
-    #             else TITLE_BAR_HEX_COLORS["light"]
-    #         )
-    #         windll.dwmapi.DwmSetWindowAttribute(
-    #             HWND, DWMWA_ATTRIBUTE, byref(c_int(COLOR)), sizeof(c_int)
-    #         )
-    #     except:
-    #         pass
+    def title_bar_color(self, is_dark):
+        try:
+            HWND = windll.user32.GetParent(self.winfo_id())
+            DWMWA_ATTRIBUTE = 35
+            COLOR = (
+                TITLE_BAR_HEX_COLORS["dark"]
+                if is_dark
+                else TITLE_BAR_HEX_COLORS["light"]
+            )
+            windll.dwmapi.DwmSetWindowAttribute(
+                HWND, DWMWA_ATTRIBUTE, byref(c_int(COLOR)), sizeof(c_int)
+            )
+        except:
+            pass
 
 
 class OutputLabel(ctk.CTkLabel):

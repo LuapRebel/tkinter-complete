@@ -3,7 +3,7 @@ from settings import *
 
 
 class Button(CTkButton):
-    def __init__(self, parent, func, text, column, row, font, color="dark-gray"):
+    def __init__(self, parent, text, func, col, row, font, span=1, color="dark-gray"):
         super().__init__(
             master=parent,
             command=func,
@@ -12,14 +12,29 @@ class Button(CTkButton):
             font=font,
             fg_color=COLORS[color]["fg"],
             hover_color=COLORS[color]["hover"],
-            bg_color=COLORS[color]["text"],
+            text_color=COLORS[color]["text"],
         )
         self.grid(
-            column=column,
+            column=col,
+            columnspan=span,
             row=row,
             sticky="nsew",
             padx=STYLING["gap"],
             pady=STYLING["gap"],
+        )
+
+
+class NumButton(Button):
+    def __init__(self, parent, text, func, col, row, font, span, color="light-gray"):
+        super().__init__(
+            parent=parent,
+            text=text,
+            func=lambda: func(text),
+            col=col,
+            row=row,
+            font=font,
+            span=span,
+            color=color,
         )
 
 

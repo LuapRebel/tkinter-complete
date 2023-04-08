@@ -46,22 +46,22 @@ OPERATORS = {
     "percent": {"col": 2, "row": 2, "text": "%", "image_path": None},
 }
 
+BLACK = "#000000"
+WHITE = "#EEEEEE"
+
 COLORS = {
     "light-gray": {
         "fg": ("#505050", "#D4D4D2"),
         "hover": ("#686868", "#efefed"),
-        "text": ("white", "black"),
+        "text": (WHITE, BLACK),
     },
     "dark-gray": {
         "fg": ("#D4D4D2", "#505050"),
         "hover": ("#efefed", "#686868"),
-        "text": ("black", "white"),
+        "text": (BLACK, WHITE),
     },
-    "orange": {"fg": "#FF9500", "hover": "#ffb143", "text": ("black", "white")},
-    "orange-highlight": {"fg": "white", "hover": "white", "text": ("black", "#FF9500")},
+    "orange": {"fg": "#FF9500", "hover": "#ffb143", "text": (BLACK, WHITE)},
+    "orange-highlight": {"fg": WHITE, "hover": WHITE, "text": (BLACK, "#FF9500")},
 }
 
 TITLE_BAR_HEX_COLORS = {"dark": 0x00000000, "light": 0x00EEEEEE}
-
-BLACK = "#000000"
-WHITE = "#EEEEEE"

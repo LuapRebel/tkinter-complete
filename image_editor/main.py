@@ -1,6 +1,6 @@
 import customtkinter as ctk
 from PIL import Image, ImageTk
-from image_widgets import ImageImport, ImageOutput
+from image_widgets import CloseOutput, ImageImport, ImageOutput
 from settings import *
 
 
@@ -31,6 +31,12 @@ class App(ctk.CTk):
 
         self.image_import.grid_forget()
         self.image_output = ImageOutput(self, self.resize_image)
+        self.close_button = CloseOutput(self, self.close_edit)
+
+    def close_edit(self):
+        self.image_output.grid_forget()
+        self.close_button.place_forget()
+        self.import_import = ImageImport(self, self.import_image)
 
     def resize_image(self, event):
         # current canvas ratio
